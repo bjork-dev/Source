@@ -1,6 +1,6 @@
 # Slutliga uppgift/tenta
 
-Deadline: 2021-10-15 kl 23:55
+Deadline: 2021-10-15 kl 23:55 s
 
 Detta är den slutliga uppgift/tenta för kursen Utveckling av molnbaserade applikationer.
 
