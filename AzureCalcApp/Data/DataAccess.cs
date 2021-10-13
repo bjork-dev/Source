@@ -10,25 +10,20 @@ namespace AzureCalcApp.Data
 {
     public class DataAccess : IDataAccess
     {
-        private readonly IHttpClientFactory _httpClient;
+        private readonly HttpClient _httpClient = new();
 
-        public DataAccess(IHttpClientFactory httpClient)
-        {
-            _httpClient = httpClient;
-        }
 
         public async Task<HttpResponseMessage> PostAsync(string numbers)
         {
-            var client = _httpClient.CreateClient();
+
             var json = JsonSerializer.Serialize(numbers);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
-            return await client.PostAsync("", data);
+            return await _httpClient.PostAsync("http://localhost:7071/api/AddNumbers", data);
         }
 
         public async Task<string> GetAsync()
         {
-            var client = _httpClient.CreateClient();
-            var response = await client.GetAsync("");
+            var response = await _httpClient.GetAsync("");
             return await response.Content.ReadAsStringAsync();
         }
     }

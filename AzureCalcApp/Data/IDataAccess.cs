@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AzureCalcApp.Data
 {
-    interface IDataAccess
+    public interface IDataAccess
     {
         Task<HttpResponseMessage> PostAsync(string numbers);
         Task<string> GetAsync();

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using AzureCalcApp.Data;
 
 namespace AzureCalcApp
 {
@@ -25,7 +26,7 @@ namespace AzureCalcApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            services.AddHttpClient();
+            services.AddScoped<IDataAccess, DataAccess>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
