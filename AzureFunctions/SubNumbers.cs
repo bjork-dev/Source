@@ -11,9 +11,9 @@ using System.Data;
 
 namespace Calculator.Functions
 {
-    public static class AddNumbers
+    public static class SubNumbers
     {
-        [FunctionName("AddNumbers")]
+        [FunctionName("SubNumbers")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
             ILogger log)
@@ -23,8 +23,8 @@ namespace Calculator.Functions
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             string data = JsonConvert.DeserializeObject(requestBody).ToString();
 
-            if(!data.Contains('+'))
-                return new BadRequestObjectResult("Missing '+' operator");
+            if(!data.Contains('-'))
+                return new BadRequestObjectResult("Missing '-' operator");
 
             try
             {
