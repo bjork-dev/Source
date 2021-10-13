@@ -16,7 +16,7 @@ namespace AzureCalcApp.Pages
 
         [BindProperty]
         public string Result { get; set; }
-
+        public static Queue<string> Results { get; set; } = new Queue<string>();
         private readonly IDataAccess _data;
 
         public IndexModel(ILogger<IndexModel> logger, IDataAccess data)
@@ -24,17 +24,11 @@ namespace AzureCalcApp.Pages
             _logger = logger;
             _data = data;
         }
-
-        public void OnGet()
+        public async Task OnPostAsync(string result)
         {
-
+            var response = await _data.Calculate(result);
+            Results.Enqueue(response);
+            Results.ValidateQueue(); // Simple extension method for not allowing more than 10 items in the queue.
         }
-
-        public async Task<RedirectToPageResult> OnPostAsync(string result)
-        {
-            var response = await _data.PostAsync(result);
-            return RedirectToPage("Index");
-        }
-
     }
 }

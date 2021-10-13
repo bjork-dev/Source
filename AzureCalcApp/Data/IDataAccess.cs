@@ -8,6 +8,6 @@ namespace AzureCalcApp.Data
 {
     public interface IDataAccess
     {
-        Task<HttpResponseMessage> PostAsync(string numbers);
+        Task<string> Calculate(string numbers);
     }
 }

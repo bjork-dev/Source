@@ -45,10 +45,12 @@
 
 <h2>Latest calculations</h2>
 <table>
-    <tr>
-        <td>Test</td>
-    </tr>
-
+    @foreach (var equation in IndexModel.Results)
+    {
+     <tr>
+        <td>@equation</td>
+    </tr>   
+    }
 </table>
 
 
