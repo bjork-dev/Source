@@ -7,9 +7,9 @@ on: [push]
 jobs:
     build-and-push-package:
         runs-on: ubuntu-latest
-        defaults:
-         run:
-            working-directory: dart_project
+        env: 
+          working-directory: 'AzureCalcApp'
+          DOTNET_VERSION: '3.1.x'
         steps:
         - name: Checkout code
           uses: actions/checkout@master
