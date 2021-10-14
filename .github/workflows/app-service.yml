@@ -1,8 +1,9 @@
 name: Build App & Push to container registry
 
-on: [push]
-   # paths:
-   #   - 'AzureCalcApp/**'
+on:
+  push:
+    paths:
+      - 'AzureCalcApp/**' # Trigger worflow only when app folder is updated.
   
 jobs:
     build-and-push-package:
