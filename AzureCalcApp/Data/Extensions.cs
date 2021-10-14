@@ -6,7 +6,7 @@ namespace AzureCalcApp.Data
     {
         public static void ValidateQueue(this Queue<string> queue ) 
         {
-            if(queue.Count > 10) 
+            while(queue.Count > 10) 
                 queue.Dequeue();
         }
     }

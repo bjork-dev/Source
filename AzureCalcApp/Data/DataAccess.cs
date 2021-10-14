@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -45,6 +46,17 @@ namespace AzureCalcApp.Data
             if(subResult.IsSuccessStatusCode)
                 return await subResult.Content.ReadAsStringAsync();
             return null;
+        }
+
+        public async Task<Queue<string>> GetNumbers()
+        {
+            string code = await GetSecret("GetNumbers");
+            var response = await _httpClient.GetAsync($"https://bjorkdev-calculator.azurewebsites.net/api/SubNumbers?code={code}");
+
+            if(!response.IsSuccessStatusCode)
+                return null;
+
+            return await response.Content.ReadFromJsonAsync<Queue<string>>();
         }
 
         private async Task<string> GetSecret(string secretName)
