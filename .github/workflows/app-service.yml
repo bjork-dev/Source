@@ -17,7 +17,7 @@ jobs:
           uses: actions/setup-dotnet@v1
           with:
             dotnet-version: ${{ env.DOTNET_VERSION }}
-        - run: dotnet build AzureCalcApp.csproj
+        - run: dotnet build ./AzureCalcApp.csproj
 
             
         - name: Login to GitHub Container Registry
