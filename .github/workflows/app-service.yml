@@ -1,9 +1,9 @@
 name: Build App & Push to container registry
 
 on:
-  push:
-    paths:
-      - 'AzureCalcApp/**' # Trigger worflow only when app folder is updated.
+  push
+   # paths:
+     # - 'AzureCalcApp/**' # Trigger worflow only when app folder is updated.
   
 jobs:
     build-and-push-package:
@@ -40,3 +40,10 @@ jobs:
               ghcr.io/pgbsnh20/moln-tenta-bjork-dev/azure-calc-app:${{ github.run_number }}
             secrets: |
               GIT_AUTH_TOKEN=${{ secrets.GITHUB_TOKEN }}
+              - uses: azure/webapps-deploy@v2
+              
+        - uses: azure/webapps-deploy@v2
+          with:
+            app-name: 'bjorkdev-calc-app'
+            publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+            images: 'ghcr.io/pgbsnh20/moln-tenta-bjork-dev/azure-calc-app:latest'
