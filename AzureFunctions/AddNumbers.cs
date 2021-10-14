@@ -16,6 +16,11 @@ namespace Calculator.Functions
         [FunctionName("AddNumbers")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
+            [CosmosDB(
+                databaseName: "Calculations",
+                collectionName: "Items",
+                ConnectionStringSetting = "CosmosDbConnectionString")]
+                out string calculation,
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
@@ -23,7 +28,7 @@ namespace Calculator.Functions
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             string data = JsonConvert.DeserializeObject(requestBody).ToString();
 
-            if(!data.Contains('+'))
+            if (!data.Contains('+'))
                 return new BadRequestObjectResult("Missing '+' operator");
 
             try
@@ -31,7 +36,7 @@ namespace Calculator.Functions
                 DataTable dt = new DataTable();
                 string responseMessage = dt.Compute(data, "").ToString();
                 log.LogInformation(responseMessage);
-
+                calculation = $"{data} = {result}";
                 return new OkObjectResult(responseMessage);
             }
             catch (System.Exception ex)

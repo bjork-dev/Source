@@ -16,6 +16,11 @@ namespace Calculator.Functions
         [FunctionName("SubNumbers")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
+            [CosmosDB(
+                databaseName: "Calculations",
+                collectionName: "Items",
+                ConnectionStringSetting = "CosmosDbConnectionString")]
+                out string calculation,
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
@@ -29,10 +34,11 @@ namespace Calculator.Functions
             try
             {
                 DataTable dt = new DataTable();
-                string responseMessage = dt.Compute(data, "").ToString();
-                log.LogInformation(responseMessage);
+                string result = dt.Compute(data, "").ToString();
+                log.LogInformation(result);
+                calculation = $"{data} = {result}";
 
-                return new OkObjectResult(responseMessage);
+                return new OkObjectResult(result);
             }
             catch (System.Exception ex)
             {
