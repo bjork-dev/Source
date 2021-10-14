@@ -27,8 +27,16 @@ namespace AzureCalcApp.Pages
         public async Task OnPostAsync(string result)
         {
             var response = await _data.Calculate(result);
-            Results.Enqueue(response);
-            Results.ValidateQueue(); // Simple extension method for not allowing more than 10 items in the queue.
+            if (response is null)
+            {
+                return;
+            }
+            else
+            {
+                Results.Enqueue(response);
+                Results.ValidateQueue(); // Simple extension method for not allowing more than 10 items in the queue.
+            }
+
         }
     }
 }
