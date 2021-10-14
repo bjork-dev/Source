@@ -37,3 +37,5 @@ jobs:
             tags: |
               ghcr.io/bjork-dev/azure-calc-app:latest
               ghcr.io/bjork-dev/azure-calc-app:${{ github.run_number }}
+            secrets: |
+              GIT_AUTH_TOKEN=${{ secrets.GITHUB_TOKEN }}
