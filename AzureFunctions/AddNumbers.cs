@@ -20,7 +20,7 @@ namespace Calculator.Functions
                 databaseName: "Calculations",
                 collectionName: "Items",
                 ConnectionStringSetting = "CosmosDbConnectionString")]
-                out string calculation,
+                IAsyncCollector<dynamic> calculation,
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
@@ -34,16 +34,21 @@ namespace Calculator.Functions
             try
             {
                 DataTable dt = new DataTable();
-                string responseMessage = dt.Compute(data, "").ToString();
-                log.LogInformation(responseMessage);
-                calculation = $"{data} = {result}";
-                return new OkObjectResult(responseMessage);
-            }
+                string result = dt.Compute(data, "").ToString();
+                log.LogInformation(result);
+                await calculation.AddAsync(new
+                {
+                    id = System.Guid.NewGuid().ToString(),
+                    result = $"{data} = {result}"
+                });
+
+            return new OkObjectResult(result);
+        }
             catch (System.Exception ex)
             {
                 log.LogError(ex.Message);
                 return new BadRequestObjectResult(ex.Message);
-            }
-        }
+    }
+}
     }
 }
