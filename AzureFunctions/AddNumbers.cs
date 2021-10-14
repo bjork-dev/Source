@@ -11,7 +11,7 @@ using System.Data;
 
 namespace Calculator.Functions
 {
-    public static class AddNumbers
+    public static class AddNumbers // api/AddNumbers
     {
         [FunctionName("AddNumbers")]
         public static async Task<IActionResult> Run(
