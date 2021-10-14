@@ -1,3 +1,4 @@
+using System;
 using Newtonsoft.Json;
 
 namespace AzureCalcApp.Data
@@ -6,5 +7,6 @@ namespace AzureCalcApp.Data
     {
         public string Id { get; set; }
         public string Result { get; set; }
+        public DateTime RunDate { get; set; }
     }
 }

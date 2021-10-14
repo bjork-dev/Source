@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Linq;
 using AzureFunctions.Models;
 
 namespace Calculator.Functions
@@ -25,10 +26,12 @@ namespace Calculator.Functions
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
-
             if (calcs == null)
                 return new NotFoundObjectResult("No entries found.");
-            return new OkObjectResult(calcs);
+
+            var latestCalculations = calcs.OrderBy(c => c.RunDate);
+            
+            return new OkObjectResult(latestCalculations);
         }
     }
 }

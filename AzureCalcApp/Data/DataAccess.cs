@@ -28,6 +28,8 @@ namespace AzureCalcApp.Data
         };
         public async Task<string> Calculate(string numbers)
         {
+            if (string.IsNullOrWhiteSpace(numbers))
+                return null;
             string code = string.Empty;
             var json = JsonSerializer.Serialize(numbers);
             var data = new StringContent(json, Encoding.UTF8, "application/json");

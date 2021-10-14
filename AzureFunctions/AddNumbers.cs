@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.Data;
+using AzureFunctions.Models;
 
 namespace Calculator.Functions
 {
@@ -36,10 +37,11 @@ namespace Calculator.Functions
                 DataTable dt = new DataTable();
                 string result = dt.Compute(data, "").ToString();
                 log.LogInformation(result);
-                await calculation.AddAsync(new
+                await calculation.AddAsync(new Calculation
                 {
-                    id = System.Guid.NewGuid().ToString(),
-                    result = $"{data} = {result}"
+                    Id = System.Guid.NewGuid().ToString(),
+                    Result = $"{data} = {result}",
+                    RunDate = DateTime.Now
                 });
 
                 return new OkObjectResult(result);

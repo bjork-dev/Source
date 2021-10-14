@@ -28,21 +28,25 @@ namespace AzureCalcApp.Pages
         public async Task OnGetAsync()
         {
             Results = await _data.GetNumbers();
-            Results.ValidateQueue(); 
+            //Results.ValidateQueue();
         }
         public async Task OnPostAsync(string result)
         {
-            var response = await _data.Calculate(result);
-            if (response is null)
+            try
             {
-                return;
+                var response = await _data.Calculate(result);
+                if (response is null)
+                {
+                    await OnGetAsync();
+                }
             }
-            else
+            catch
             {
-                return;
-                // Results.Enqueue(response);
-                // Results.ValidateQueue(); // Simple extension method for not allowing more than 10 items in the queue.
+                await OnGetAsync();
+
             }
+
+            await OnGetAsync();
 
         }
     }
