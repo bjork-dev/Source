@@ -16,7 +16,7 @@ namespace AzureCalcApp.Pages
 
         [BindProperty]
         public string Result { get; set; }
-        public Queue<string> Results { get; set; } = new Queue<string>();
+        public Queue<Calculation> Results { get; set; } = new();
         private readonly IDataAccess _data;
 
         public IndexModel(ILogger<IndexModel> logger, IDataAccess data)

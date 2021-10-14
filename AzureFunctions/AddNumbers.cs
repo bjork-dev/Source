@@ -42,13 +42,13 @@ namespace Calculator.Functions
                     result = $"{data} = {result}"
                 });
 
-            return new OkObjectResult(result);
-        }
+                return new OkObjectResult(result);
+            }
             catch (System.Exception ex)
             {
                 log.LogError(ex.Message);
                 return new BadRequestObjectResult(ex.Message);
-    }
-}
+            }
+        }
     }
 }

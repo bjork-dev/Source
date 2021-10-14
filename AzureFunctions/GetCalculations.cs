@@ -7,6 +7,8 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using System.Collections.Generic;
+using AzureFunctions.Models;
 
 namespace Calculator.Functions
 {
@@ -19,11 +21,10 @@ namespace Calculator.Functions
                 databaseName: "Calculations",
                 collectionName: "Items",
                 ConnectionStringSetting = "CosmosDbConnectionString")]
-                string[] calcs,
+                IEnumerable<Calculation> calcs,
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
-
 
             if (calcs == null)
                 return new NotFoundObjectResult("No entries found.");
