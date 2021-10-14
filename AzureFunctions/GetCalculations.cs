@@ -16,7 +16,7 @@ namespace Calculator.Functions
     public static class GetCalculations
     {
         [FunctionName("GetCalculations")]
-        public static async Task<IActionResult> Run(
+        public static IActionResult Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req,
             [CosmosDB(
                 databaseName: "Calculations",
@@ -29,7 +29,7 @@ namespace Calculator.Functions
             if (calcs == null)
                 return new NotFoundObjectResult("No entries found.");
 
-            var latestCalculations = calcs.OrderBy(c => c.RunDate).Take(10);
+            var latestCalculations = calcs.OrderByDescending(c => c.RunDate).Take(10);
             
             return new OkObjectResult(latestCalculations);
         }
