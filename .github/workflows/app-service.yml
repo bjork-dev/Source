@@ -9,7 +9,7 @@ jobs:
     build-and-push-package:
         runs-on: ubuntu-latest
         env: 
-          working-directory: AzureCalcApp/
+          working-directory: ./AzureCalcApp/
         steps:
         - name: Checkout code
           uses: actions/checkout@master
@@ -18,9 +18,8 @@ jobs:
           uses: actions/setup-dotnet@v1
           with:
             dotnet-version: ${{ env.DOTNET_VERSION }}
-            
-        - name: Build Project
-          run: dotnet build
+        - run: dotnet build AzureCalcApp.csproj
+
             
         - name: Login to GitHub Container Registry
           uses: docker/login-action@v1.10.0
