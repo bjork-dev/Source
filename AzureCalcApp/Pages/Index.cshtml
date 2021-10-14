@@ -48,7 +48,7 @@
     @foreach (var equation in Model.Results)
         {
             <tr>
-                <td>@equation.RunDate: @equation.Result</td>
+                <td>@equation.RunDate: <strong>@equation.Result</strong></td>
             </tr>
         }
 </table>
