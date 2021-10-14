@@ -19,7 +19,7 @@ jobs:
           with:
             dotnet-version: ${{ env.DOTNET_VERSION }}
         - run: dotnet build
-        - working-directory: ${{ env.working-directory }}
+          working-directory: ${{ env.working-directory }}
        
         - name: Login to GitHub Container Registry
           uses: docker/login-action@v1.10.0
