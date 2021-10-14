@@ -1,0 +1,48 @@
+name: Build App & Push to container registry
+
+on:
+  push
+   # paths:
+     # - 'AzureCalcApp/**' # Trigger worflow only when app folder is updated.
+  
+jobs:
+    build-and-push-package:
+        runs-on: ubuntu-latest
+        env: 
+          working-directory: './AzureCalcApp'
+          DOTNET_VERSION: '5.0.x'
+        steps:
+        - name: Checkout code
+          uses: actions/checkout@master
+          
+        - name: Setup .NET ${{ env.DOTNET_VERSION }} Environment
+          uses: actions/setup-dotnet@v1
+          with:
+            dotnet-version: ${{ env.DOTNET_VERSION }}
+        - run: dotnet build
+          working-directory: ${{ env.working-directory }}
+       
+        - name: Login to GitHub Container Registry
+          uses: docker/login-action@v1.10.0
+          with:
+             registry: ghcr.io
+             username: ${{ github.actor }};
+             password: ${{ secrets.GITHUB_TOKEN }}
+             
+        - name: Build and push container package
+          id: docker_build
+          uses: docker/build-push-action@v2.7.0
+          with:
+            push: true
+            context: './AzureCalcApp'
+            tags: |
+              ghcr.io/pgbsnh20/moln-tenta-bjork-dev/azure-calc-app:latest
+              ghcr.io/pgbsnh20/moln-tenta-bjork-dev/azure-calc-app:${{ github.run_number }}
+            secrets: |
+              GIT_AUTH_TOKEN=${{ secrets.GITHUB_TOKEN }}
+              
+        - uses: azure/webapps-deploy@v2
+          with:
+            app-name: 'bjorkdev-calc-app'
+            publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+            images: 'ghcr.io/pgbsnh20/moln-tenta-bjork-dev/azure-calc-app:latest'
