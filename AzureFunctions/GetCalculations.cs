@@ -29,7 +29,7 @@ namespace Calculator.Functions
             if (calcs == null)
                 return new NotFoundObjectResult("No entries found.");
 
-            var latestCalculations = calcs.OrderBy(c => c.RunDate);
+            var latestCalculations = calcs.OrderBy(c => c.RunDate).Take(10);
             
             return new OkObjectResult(latestCalculations);
         }
