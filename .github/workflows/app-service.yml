@@ -9,7 +9,7 @@ jobs:
     build-and-push-package:
         runs-on: ubuntu-latest
         env: 
-          working-directory: ./AzureCalcApp
+          working-directory: ./AzureCalcApp/
         steps:
         - name: Checkout code
           uses: actions/checkout@master
