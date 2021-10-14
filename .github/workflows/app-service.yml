@@ -1,9 +1,8 @@
 name: Build App & Push to container registry
 
-on:
-  push:
-    paths:
-      - 'AzureCalcApp/**'
+on: [push]
+   # paths:
+   #   - 'AzureCalcApp/**'
   
 jobs:
     build-and-push-package:
