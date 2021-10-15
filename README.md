@@ -166,4 +166,24 @@ Om det är functions som har fått commits kommer koden pushas direkt till Azure
 ![image](https://user-images.githubusercontent.com/58253756/137465393-67754bc4-cbde-4379-bd2a-5d3433168a38.png)
 
 
+### Application Insights
+Jag har adderat telemetry till Service Providern, vilket ger tillgång till backend monitorering.
+#### Startup.cs
+```csharp
+public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddApplicationInsightsTelemetry(Configuration);
+            ...
+```
+Samt injicerat Javascript-modulen för att kunna även samla data från frontend (som användarens webbläsar-metadata, osv)
 
+#### _ViewImports
+```csharp
+@inject Microsoft.ApplicationInsights.AspNetCore.JavaScriptSnippet JavaScriptSnippet
+```
+#### _Layout.cshtml
+```html
+....
+    @Html.Raw(JavaScriptSnippet.FullScript)
+</head>
+```
