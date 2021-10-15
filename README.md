@@ -149,7 +149,7 @@ if (calcs == null)
 ```
 
 # Deployment Flow
-Diagrammet visar min vår CI/CD pipeline fungerar.
+Diagrammet visar hur min CI/CD pipeline fungerar.
 
 ![asdaf drawio](https://user-images.githubusercontent.com/58253756/137464743-a2cd7418-682f-4226-a7fb-3ed2f4e66709.png)
 
