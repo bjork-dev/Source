@@ -50,7 +50,7 @@ namespace AzureCalcApp.Data
             return null;
         }
 
-        public async Task<Queue<Calculation>> GetNumbers()
+        public async Task<Calculation[]> GetNumbers()
         {
             string code = await GetSecret("GetCalculations");
             var response = await _httpClient.GetAsync($"https://bjorkdev-calculator.azurewebsites.net/api/GetCalculations?code={code}");
@@ -58,7 +58,7 @@ namespace AzureCalcApp.Data
             if(!response.IsSuccessStatusCode)
                 return null;
 
-            var queue = await response.Content.ReadFromJsonAsync<Queue<Calculation>>();
+            var queue = await response.Content.ReadFromJsonAsync<Calculation[]>();
             return queue;
         }
 

@@ -16,7 +16,7 @@ namespace AzureCalcApp.Pages
 
         [BindProperty]
         public string Result { get; set; }
-        public Queue<Calculation> Results { get; set; } = new();
+        public Calculation[] Results { get; set; } = {};
         private readonly IDataAccess _data;
 
         public IndexModel(ILogger<IndexModel> logger, IDataAccess data)
@@ -45,9 +45,7 @@ namespace AzureCalcApp.Pages
                 await OnGetAsync();
 
             }
-
             await OnGetAsync();
-
         }
     }
 }

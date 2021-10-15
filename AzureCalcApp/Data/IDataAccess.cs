@@ -6,6 +6,6 @@ namespace AzureCalcApp.Data
     public interface IDataAccess
     {
         Task<string> Calculate(string numbers);
-        Task<Queue<Calculation>> GetNumbers();
+        Task<Calculation[]> GetNumbers();
     }
 }
