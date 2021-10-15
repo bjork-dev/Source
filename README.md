@@ -135,7 +135,7 @@ public async Task<Queue<Calculation>> GetNumbers()
 ```
 
 
-GetCalculations-funktionen hämtar de senaste 10 beräkningarna (rangordnade på datum) och returnerar dem till appen.
+### GetCalculations-funktionen hämtar de senaste 10 beräkningarna (rangordnade på datum) och returnerar dem till appen.
 
 ```csharp
 ...
