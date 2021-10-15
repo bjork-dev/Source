@@ -27,7 +27,7 @@ namespace AzureCalcApp.Pages
         public void OnGet()
         {
             RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
-            _logger.LogError(HttpContext.TraceIdentifier);
+            _logger.LogError(HttpContext.TraceIdentifier + "s");
         }
     }
 }
