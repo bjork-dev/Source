@@ -83,7 +83,7 @@ if (numbers.Contains('+')) {
 ```
 #### Om vår input är fel kommer NULL att returneras, som jag hanterar i detta fall genom att bara uppdatera sidan. (Inga exceptions eller felmeddelanden kastas)
 
-#### Funktionen AddNumbers eller SubNumbers beräknar vår ekvation direkt via DataTable klassen som har en Compute metod som kan beräkna direkt från strängar. lägger till beräkningen i databasen => 
+#### Funktionen AddNumbers eller SubNumbers beräknar vår ekvation direkt via DataTable klassen som har en Compute metod som kan beräkna direkt från strängar. Sedan lägger funktionen till beräkningen i databasen via CosmosDB attributen som abstraktherar bort connection, osv. => 
 
 ```csharp
 if (!data.Contains('+'))
