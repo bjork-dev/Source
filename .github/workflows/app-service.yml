@@ -40,9 +40,3 @@ jobs:
               ghcr.io/pgbsnh20/moln-tenta-bjork-dev/azure-calc-app:${{ github.run_number }}
             secrets: |
               GIT_AUTH_TOKEN=${{ secrets.GITHUB_TOKEN }}
-              
-        - uses: azure/webapps-deploy@v2
-          with:
-            app-name: 'bjorkdev-calc-app'
-            publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-            images: 'ghcr.io/pgbsnh20/moln-tenta-bjork-dev/azure-calc-app:latest'
